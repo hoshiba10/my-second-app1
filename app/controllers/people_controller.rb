@@ -19,6 +19,28 @@ class PeopleController < ApplicationController
     end
   end
   
+  def edit
+    logged_in_user
+    @person = Person.find(params[:id])
+    if @person == current_user
+      render 'edit'
+    else
+      render 'show'
+    end
+  end
+  
+  def update
+    logged_in_user
+    @person = Person.find(params[:id])
+    if @person == current_user
+      if @person.update(person_params)
+        redirect_to @person
+      else
+        render 'edit'
+      end
+    end
+  end
+  
   private
   def person_params
     params.require(:person).permit(:name, :email, :sex, :password, :password_confirmation)
