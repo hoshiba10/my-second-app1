@@ -1,6 +1,6 @@
 <%= link_to "Twitter", '#' %>
     <ul>
-        <li><%= link_to "Home", '#' %></li>
+        <li><%= link_to "トップページ", root_path %></li>
         
         <% if logged_in? %>
             <li><%= link_to "ログアウト", logout_path, method: "delete" %></li>

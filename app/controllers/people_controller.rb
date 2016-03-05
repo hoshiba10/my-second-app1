@@ -16,6 +16,7 @@ class PeopleController < ApplicationController
     logged_in_user
     if current_user
       @person = Person.find(params[:id])
+      @tweets = @person.tweets.order(created_at: :desc)
     end
   end
   
@@ -39,6 +40,18 @@ class PeopleController < ApplicationController
         render 'edit'
       end
     end
+  end
+  
+  def followings
+    logged_in_user
+    @person = Person.find(params[:id])
+    @followings = @person.following_people
+  end
+  
+  def followers
+    logged_in_user
+    @person = Person.find(params[:id])
+    @followers = @person.follower_people
   end
   
   private
